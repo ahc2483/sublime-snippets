@@ -1,0 +1,112 @@
+<snippet>
+	<content><![CDATA[
+var PF${1:ParseClassName} = Parse.Object.extend("${1:ParseClassName}");
+
+/*  ${1:ParseClasName} repository service
+    provides methods for accessing ${1:ParseClasName}
+*/
+angular.module('services.${2:moduleName}.repository', []).factory('${3:ServiceName}', ['\$q', 
+function(\$q) {
+
+	var mapToInternal = function(parseObj){
+		return {
+			id: parseObj.id
+			//TODO: Add other properties
+		};
+	};
+
+	var mapFromInternal = function(internalObj){
+		var external = new PF${1:ParseClassName}();
+		
+		_.each(_.pairs(internalObj), function(kvPair){
+			external.set(kvPair[0], kvPair[1]);
+		});
+
+		return external;
+	};
+
+	return {
+		query: function(predicate){
+			var deferred = \$q.defer();
+				query = new Parse.Query(PF${1:ParseClassName});
+
+			query.find({
+				success: function(results){
+					deferred.resolve(_.map(results, mapToInternal));
+				},
+				error: function(obj, error){
+					deferred.reject();
+				}
+			});
+
+			return deferred.promise;
+		},
+		get: function(id){
+			var deferred = \$q.defer(),
+				query = new Parse.Query(PF${1:ParseClassName});
+
+			query.get(id, {
+				success: function(result){
+					deferred.resolve(mapToInternal(result));
+				},
+				error: function(obj, error){
+					deferred.reject();
+				}
+			});
+
+			return deferred.promise;
+		},
+		save: function(new${1:ParseClassName}){
+			var deferred = \$q.defer();
+
+			mapFromInternal(new${1:ParseClassName})
+				.save(null, {
+					success: function(newObj){
+						new${1:ParseClassName}.id = newObj.id;
+						deferred.resolve(new${1:ParseClassName});
+					},
+					error: function(obj, error){
+						deferred.reject(error.description);
+					}
+				});
+			
+			return deferred.promise;
+		},
+		update: function(existing${1:ParseClassName}){
+			var deferred = \$q.defer();
+			mapFromInternal(existing${1:ParseClassName})
+				.save({
+					success: function(existingObj){
+						deferred.resolve();
+					},
+					error: function(obj, error){
+						deferred.reject(error.description);
+					}
+				});
+
+			return deferred.promise;
+		},
+		remove: function(removed${1:ParseClassName}){
+			var deferred = \$q.defer();
+
+			mapFromInternal(removed${1:ParseClassName})
+				.destroy({
+					success: function(removedObj){
+						deferred.resolve();
+					},
+					error: function(obj, error){
+						deferred.reject(error.description);
+					}
+				});
+
+			return deferred.promise;
+		}
+	};
+}]);
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>pfRepository</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

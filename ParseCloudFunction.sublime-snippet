@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+Parse.Cloud.define("${1:functionName}", function(request, response){
+		var _ = require("underscore"),
+			PF${2:className}Object = new Parse.Object.extend("${2:className}");
+
+		var query = new Parse.Query(PF${2:className}Object);
+		
+		//TODO: Add Query Conditions
+
+		query.find()
+			.then(function(results){
+				response.success(results);
+			}, function(error){
+				response.error(error.message);
+			});
+});
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>parseCloudFunction</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

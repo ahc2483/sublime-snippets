@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+${1:AppVar}.controller('${2:ControllerName}', ['\$scope', '\$log', 
+function(\$scope, \$log){
+
+	/****************** Scope Defaults **********************/
+
+	\$scope.viewModel = {
+
+	};
+
+	/****************** Scope Functions ********************/
+
+	//TODO: Define Functions
+
+	/******************** Scope Init **********************/
+
+	\$scope.init = function(){
+
+	}();
+}]);
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>emptyController</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

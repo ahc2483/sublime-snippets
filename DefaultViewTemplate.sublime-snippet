@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[
+<nav class="navbar navbar-default top-buffer" role="navigation">
+    <ul class="nav navbar-nav">
+        <li class="navbar-brand page-title">${1:HeaderTitle}</li>
+    </ul>
+</nav>
+<div class="view-container">
+</div>
+<div class="top-buffer">
+	<pre>{{model | json}}</pre>
+</div>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>defaultView</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,0 +1,32 @@
+<snippet>
+	<content><![CDATA[
+${1:AppVar}.controller('${2:ControllerName}', ['\$scope', '\$log', '${3:ClassName}Repository', 
+function(\$scope, \$log, ${3:ClassName}Repository){
+
+	/****************** Scope Defaults **********************/
+
+	\$scope.viewModel = {
+		${3:ClassName}Collection: []
+	};
+
+	/****************** Scope Functions ********************/
+
+	//TODO: Define Functions
+
+	/******************** Scope Init **********************/
+
+	\$scope.init = function(){
+		${3:ClassName}Repository.query({})
+			.then(function(results){
+				\$scope.viewModel.collection = results;
+			}, function(err){
+				alert(err.message);
+			})
+	}();
+}]);
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>dataListController</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
